@@ -13,6 +13,8 @@ public class Receptacle : MonoBehaviour
     void Start()
     {
         spriteRen = GetComponent<SpriteRenderer>();
+
+        PickNewDesiredResult();
     }
 
     //void OnMouseOver()
@@ -25,6 +27,10 @@ public class Receptacle : MonoBehaviour
     //    spriteRen.color = NormalColor;
     //}
 
+    void PickNewDesiredResult()
+    {
+
+    }
 
     void Update()
     {

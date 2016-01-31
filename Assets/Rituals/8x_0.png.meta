@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bb4fa76b764d17b4182b64d0ea891346
-timeCreated: 1454269736
+timeCreated: 1454272964
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -58,7 +58,7 @@ TextureImporter:
     21300102: 8x_0_51
     21300104: 8x_0_52
     21300106: 8x_0_53
-    21300108: 8x_0_54
+    21300108: potion_mana
     21300110: 8x_0_55
     21300112: 8x_0_56
     21300114: 8x_0_57
@@ -103,7 +103,7 @@ TextureImporter:
     21300192: 8x_0_96
     21300194: 8x_0_97
     21300196: 8x_0_98
-    21300198: 8x_0_99
+    21300198: boxred
     21300200: 8x_0_100
     21300202: env_tile_corner1
     21300204: env_tile_corner2
@@ -186,6 +186,7 @@ TextureImporter:
     21300358: 8x_0_179
     21300360: grate
     21300362: handle_green
+    21300364: boxgreen
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -771,7 +772,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_54
+    - name: potion_mana
       rect:
         serializedVersion: 2
         x: 10
@@ -1211,7 +1212,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_99
+    - name: boxred
       rect:
         serializedVersion: 2
         x: 140
@@ -2038,6 +2039,16 @@ TextureImporter:
         y: 63
         width: 3
         height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boxgreen
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 38
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

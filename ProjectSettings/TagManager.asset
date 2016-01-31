@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Person
   - Monster
-  - Item
+  - Thing
   layers:
   - Default
   - TransparentFX
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Environment
     uniqueID: 4072626713
+    locked: 0
+  - name: Foreground
+    uniqueID: 3890312243
     locked: 0
   - name: Default
     uniqueID: 0
