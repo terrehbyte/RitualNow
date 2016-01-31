@@ -10,6 +10,8 @@ public class HUD : MonoBehaviour
     public Color heartActive;
     public Color heartInactive;
 
+    public GameObject GameOverPanel;
+
     void Update()
     {
         // Lives
@@ -23,6 +25,11 @@ public class HUD : MonoBehaviour
             {
                 lives[i].color = heartInactive;
             }
+        }
+
+        if (player.LivesCount <= 0)
+        {
+            GameOverPanel.SetActive(true);
         }
     }
 }

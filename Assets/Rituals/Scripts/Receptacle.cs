@@ -42,13 +42,21 @@ public class Receptacle : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        bool validDrop = false;
+
         foreach(var type in acceptedTypes)
         {
             if (other.CompareTag(type))
             {
                 Statistics.instance.ParcelPlacementCount += 1;
+                validDrop = true;
                 break;
             }
+        }
+
+        if (!validDrop)
+        {
+            FindObjectOfType<Packer>().LivesCount -= 1;
         }
 
         Destroy(other.gameObject);

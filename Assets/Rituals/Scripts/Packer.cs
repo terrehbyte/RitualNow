@@ -9,8 +9,6 @@ public class Packer : MonoBehaviour
 
     private SpringJoint2D anchor;
 
-
-
     public Rigidbody2D picked
     {
         get
@@ -42,7 +40,7 @@ public class Packer : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         anchor = GetComponent<SpringJoint2D>();
         anchor.enabled = false;
@@ -51,7 +49,7 @@ public class Packer : MonoBehaviour
 
     void Update()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
