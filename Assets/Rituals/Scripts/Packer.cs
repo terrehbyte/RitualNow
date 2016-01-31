@@ -3,9 +3,13 @@ using System.Collections;
 
 public class Packer : MonoBehaviour
 {
+    public int LivesCount;
+
     public LayerMask PickerMask;
 
     private SpringJoint2D anchor;
+
+
 
     public Rigidbody2D picked
     {

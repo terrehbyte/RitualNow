@@ -10,6 +10,9 @@ public class Receptacle : MonoBehaviour
 
     private SpriteRenderer spriteRen;
 
+    [SerializeField]
+    private SpriteRenderer desiredItemImage;
+
     void Start()
     {
         spriteRen = GetComponent<SpriteRenderer>();
@@ -43,7 +46,7 @@ public class Receptacle : MonoBehaviour
         {
             if (other.CompareTag(type))
             {
-                Debug.Log("Yay!");
+                Statistics.instance.ParcelPlacementCount += 1;
                 break;
             }
         }

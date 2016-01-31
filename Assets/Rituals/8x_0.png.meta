@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bb4fa76b764d17b4182b64d0ea891346
-timeCreated: 1454272964
+timeCreated: 1454275715
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -187,6 +187,7 @@ TextureImporter:
     21300360: grate
     21300362: handle_green
     21300364: boxgreen
+    21300366: heart
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -309,8 +310,8 @@ TextureImporter:
         y: 103
         width: 8
         height: 9
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: undead1
       rect:
@@ -349,8 +350,8 @@ TextureImporter:
         y: 103
         width: 8
         height: 9
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: manky1
       rect:
@@ -359,8 +360,8 @@ TextureImporter:
         y: 103
         width: 9
         height: 8
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spook1
       rect:
@@ -369,8 +370,8 @@ TextureImporter:
         y: 103
         width: 6
         height: 7
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 8x_0_14
       rect:
@@ -479,8 +480,8 @@ TextureImporter:
         y: 91
         width: 8
         height: 9
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: undead2
       rect:
@@ -489,8 +490,8 @@ TextureImporter:
         y: 91
         width: 9
         height: 9
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: paladin2
       rect:
@@ -519,8 +520,8 @@ TextureImporter:
         y: 91
         width: 8
         height: 8
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: manky2
       rect:
@@ -529,8 +530,8 @@ TextureImporter:
         y: 91
         width: 8
         height: 9
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spook2
       rect:
@@ -539,8 +540,8 @@ TextureImporter:
         y: 91
         width: 6
         height: 8
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 8x_0_31
       rect:
@@ -1198,16 +1199,6 @@ TextureImporter:
         x: 74
         y: 53
         width: 5
-        height: 4
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_97
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 53
-        width: 9
         height: 4
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -2049,6 +2040,16 @@ TextureImporter:
         y: 38
         width: 12
         height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: heart
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 53
+        width: 5
+        height: 4
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

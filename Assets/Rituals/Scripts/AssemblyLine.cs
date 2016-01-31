@@ -24,6 +24,8 @@ public class AssemblyLine : MonoBehaviour
 
     GameObject SpawnParcel( Item newItemType )
     {
+        Statistics.instance.ParcelSpawnCount += 1;
+
         var newRail = (Instantiate(RailPrefab, StartPoint.position, Quaternion.identity) as GameObject).GetComponent<Rail>();
         newRail.End = EndPoint;
         newRail.speed = Speed;
