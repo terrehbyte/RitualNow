@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Wave
@@ -22,6 +23,10 @@ public class AssemblyLine : MonoBehaviour
 
     public ItemDatabase curDatabase;
 
+    private List<GameObject> parcels = new List<GameObject>();
+
+    public float addlDelay;
+
     GameObject SpawnParcel( Item newItemType )
     {
         Statistics.instance.ParcelSpawnCount += 1;
@@ -35,19 +40,43 @@ public class AssemblyLine : MonoBehaviour
         newProduct.GetComponent<SpriteRenderer>().sprite = newItemType.image;
         newProduct.tag = newItemType.tag;
 
+        parcels.Add(newProduct);
+
         return newRail.gameObject;
     }
 
 	// Update is called once per frame
 	void Update ()
     {
+        
+
+        if (addlDelay >= 0f)
+        {
+            addlDelay -= Time.deltaTime;
+            return;
+        }
+
         SpawnTimer += Time.deltaTime;
 
-	    if (SpawnTimer >= SpawnInterval)
+        if (SpawnTimer >= SpawnInterval)
         {
             SpawnTimer -= SpawnInterval;
             SpawnParcel(curDatabase.data[Random.Range(0, curDatabase.data.Length)]);
         }
         
 	}
+
+    public void ClearExisting()
+    {
+        for(int i = 0; i < parcels.Count; ++i)
+        {
+            if (parcels[i] != null)
+            {
+                Destroy(parcels[i]);
+            }
+        }
+
+        parcels.Clear();
+    }
+
 }

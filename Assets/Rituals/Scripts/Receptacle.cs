@@ -56,7 +56,7 @@ public class Receptacle : MonoBehaviour
 
         if (!validDrop)
         {
-            FindObjectOfType<Packer>().LivesCount -= 1;
+            FindObjectOfType<Packer>().TakeDamage(1);
         }
 
         Destroy(other.gameObject);

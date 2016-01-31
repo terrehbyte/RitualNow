@@ -11,7 +11,7 @@ public class KillBox : MonoBehaviour {
 
         if (coll.tag != "Untagged")
         {
-            player.LivesCount -= 1;
+            player.TakeDamage(1);
         }
     }
 }

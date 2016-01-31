@@ -53,5 +53,8 @@ public class HUD : MonoBehaviour
         Application.LoadLevel(level);
     }
 
-
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

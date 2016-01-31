@@ -33,4 +33,12 @@ public class Statistics : MonoBehaviour
     {
         TimeElapsed += Time.deltaTime;
     }
+
+    public void Reset()
+    {
+        ParcelSpawnCount = 0;
+        ParcelPlacementCount = 0;
+
+        TimeElapsed = 0;
+    }
 }

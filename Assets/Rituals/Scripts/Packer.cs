@@ -3,7 +3,20 @@ using System.Collections;
 
 public class Packer : MonoBehaviour
 {
-    public int LivesCount;
+    public int LivesCount
+    {
+        get
+        {
+            return _livesCount;
+        }
+        private set
+        {
+            _livesCount = value;
+        }
+    }
+
+    [SerializeField]
+    private int _livesCount = 3;
 
     public LayerMask PickerMask;
 
@@ -46,6 +59,15 @@ public class Packer : MonoBehaviour
         anchor.enabled = false;
     }
 
+    public void TakeDamage(int damage)
+    {
+        if (!GameMode.instance.isGameActive)
+        {
+            return;
+        }
+
+        LivesCount -= damage;
+    }
 
     void Update()
     {
@@ -89,7 +111,5 @@ public class Packer : MonoBehaviour
 
         //transform.position = ray.origin - Vector3.back * 2f;
     }
-
-
 
 }

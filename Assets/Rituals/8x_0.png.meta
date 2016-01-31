@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bb4fa76b764d17b4182b64d0ea891346
-timeCreated: 1454275715
+timeCreated: 1454280031
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -138,8 +138,8 @@ TextureImporter:
     21300262: 8x_0_131
     21300264: 8x_0_132
     21300266: 8x_0_133
-    21300268: 8x_0_134
-    21300270: 8x_0_135
+    21300268: box_open
+    21300270: box_closed
     21300272: 8x_0_136
     21300274: 8x_0_137
     21300276: 8x_0_138
@@ -1553,25 +1553,25 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_134
+    - name: box_open
       rect:
         serializedVersion: 2
         x: 111
         y: 20
         width: 6
         height: 8
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_135
+    - name: box_closed
       rect:
         serializedVersion: 2
         x: 120
         y: 20
         width: 6
         height: 6
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: 8x_0_136
       rect:
