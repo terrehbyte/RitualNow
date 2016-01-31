@@ -5,8 +5,8 @@ public class Receptacle : MonoBehaviour
 {
     public string[] acceptedTypes;
 
-    public Color NormalColor = Color.white;
-    public Color HoverColor = Color.green;
+    //public Color NormalColor = Color.white;
+    //public Color HoverColor = Color.green;
 
     private SpriteRenderer spriteRen;
 
@@ -15,16 +15,21 @@ public class Receptacle : MonoBehaviour
         spriteRen = GetComponent<SpriteRenderer>();
     }
 
-    void OnMouseOver()
-    {
-        spriteRen.color = HoverColor;
-    }
+    //void OnMouseOver()
+    //{
+    //    spriteRen.color = HoverColor;
+    //}
 
-    void OnMouseExit()
-    {
-        spriteRen.color = NormalColor;
-    }
+    //void OnMouseExit()
+    //{
+    //    spriteRen.color = NormalColor;
+    //}
 
+
+    void Update()
+    {
+
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

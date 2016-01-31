@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: bb4fa76b764d17b4182b64d0ea891346
-timeCreated: 1454243911
-licenseType: Free
+timeCreated: 1454269736
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: adventurer1
@@ -163,7 +163,7 @@ TextureImporter:
     21300312: 8x_0_156
     21300314: 8x_0_157
     21300316: 8x_0_158
-    21300318: 8x_0_159
+    21300318: graywall
     21300320: 8x_0_160
     21300322: 8x_0_161
     21300324: 8x_0_162
@@ -1211,16 +1211,6 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_98
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 38
-        width: 137
-        height: 12
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
     - name: 8x_0_99
       rect:
         serializedVersion: 2
@@ -1821,7 +1811,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 8x_0_159
+    - name: graywall
       rect:
         serializedVersion: 2
         x: 146

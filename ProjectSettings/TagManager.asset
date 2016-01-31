@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - Environment
-  - 
+  - Selectable
   - 
   - 
   - 
@@ -41,6 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Environment
+    uniqueID: 4072626713
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Selectable
+    uniqueID: 2744949937
+    locked: 0
+  - name: UI
+    uniqueID: 471049421
     locked: 0
