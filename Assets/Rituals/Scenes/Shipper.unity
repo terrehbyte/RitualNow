@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c9079d37419e5448cc78b342b4e208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _livesCount: 3
+  _livesCount: 10
   PickerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -11495,7 +11495,7 @@ Prefab:
     - target: {fileID: 21209684, guid: 4f6bc92f5f0f3e4498ec9be7dd202cdd, type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300014, guid: bb4fa76b764d17b4182b64d0ea891346,
+      objectReference: {fileID: 21300026, guid: bb4fa76b764d17b4182b64d0ea891346,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f6bc92f5f0f3e4498ec9be7dd202cdd, type: 2}

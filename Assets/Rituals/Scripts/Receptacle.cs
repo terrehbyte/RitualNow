@@ -49,6 +49,12 @@ public class Receptacle : MonoBehaviour
             if (other.CompareTag(type))
             {
                 Statistics.instance.ParcelPlacementCount += 1;
+
+                if (Statistics.instance.ParcelPlacementCount % 10 == 0)
+                {
+                    FindObjectOfType<Packer>().TakeDamage(-1);
+                }
+
                 validDrop = true;
                 break;
             }

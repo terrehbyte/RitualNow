@@ -11,6 +11,7 @@ public class Packer : MonoBehaviour
         }
         private set
         {
+
             _livesCount = value;
         }
     }
