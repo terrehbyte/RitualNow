@@ -36,21 +36,18 @@ public class Packer : MonoBehaviour
 
             _picked = value;
 
-            if (_picked == null)
+            if (_picked != null)
             {
-                _originalZLevel = 0;
-            }
-            else
-            {
-                Debug.Log(_picked.gameObject.name);
-                _originalZLevel = _picked.transform.position.z;
-
+                //Debug.Log(_picked.gameObject.name);
+                pickedRBData = new RigidData(_picked);
                 _picked.gravityScale = 0f;
             }
         }
     }
     private Rigidbody2D _picked;
-    private float _originalZLevel;
+    private RigidData pickedRBData;
+
+    
 
     void Start()
     {
@@ -86,19 +83,25 @@ public class Packer : MonoBehaviour
 
             if (hit)
             {
-                Debug.LogWarning("HIt something!");
+                //Debug.LogWarning("Hit something!");
                 var targetRbody = hit.collider.GetComponent<Rigidbody2D>();
 
                 if (null != targetRbody)
                 {
                     picked = targetRbody;
                 }
+
+                Interactor interactor = hit.collider.GetComponent<Interactor>();
+                if (null != interactor)
+                {
+                    interactor.DoInteraction();
+                }
             }
 
         }
         else if (Input.GetMouseButtonUp(0) && picked != null)   // let go
         {
-            _picked.gravityScale = 1f;
+            pickedRBData.Assign(picked);
             picked = null;
         }
         else if (Input.GetMouseButton(0) && picked != null) // move to new position
