@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Statistics : MonoBehaviour
+using Zenject;
+
+public class Statistics : ITickable, IInitializable
 {
     public static Statistics instance;
 
@@ -12,24 +14,15 @@ public class Statistics : MonoBehaviour
 
     public bool ShouldReplaceInstance;
 
-    void Start()
+    public void Initialize()
     {
         if (instance == null)
         {
             instance = this;
         }
-        else if (instance != null && ShouldReplaceInstance)
-        {
-            Destroy(instance);
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
     }
 
-	void Update()
+	public void Tick()
     {
         TimeElapsed += Time.deltaTime;
     }
