@@ -42,7 +42,7 @@ public class Sequencer : MonoBehaviour
         Accumulator -= TimeBetweenRamp;
         assem.addlDelay += TimeBetweenRamp;
 
-        assem.SpawnInterval -= RampUpSpawnRate;
-        assem.Speed += RampUpParcelSpeed;
+        //assem.SpawnInterval -= RampUpSpawnRate;
+        //assem.Speed += RampUpParcelSpeed;
     }
 }

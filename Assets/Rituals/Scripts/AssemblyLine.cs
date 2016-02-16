@@ -2,26 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using Zenject;
+using System;
+
 [System.Serializable]
 public class Wave
 {
     public int count;
 }
 
-public class AssemblyLine : MonoBehaviour
+public class AssemblyLine : ITickable
 {
-    public Transform StartPoint;
-    public Transform EndPoint;
+    [Inject]
+    Settings _settings;
 
-    public GameObject RailPrefab;
-    public GameObject ParcelPrefab;
-
-    public float SpawnInterval;
     private float SpawnTimer;
 
     public float Speed;
-
-    public ItemDatabase curDatabase;
 
     private List<GameObject> parcels = new List<GameObject>();
 
@@ -29,27 +26,28 @@ public class AssemblyLine : MonoBehaviour
 
     GameObject SpawnParcel( Item newItemType )
     {
-        Statistics.instance.ParcelSpawnCount += 1;
+        //Statistics.instance.ParcelSpawnCount += 1;
 
-        var newRail = (Instantiate(RailPrefab, StartPoint.position, Quaternion.identity) as GameObject).GetComponent<Rail>();
-        newRail.End = EndPoint;
-        newRail.speed = Speed;
+        //var newRail = (Instantiate(RailPrefab, StartPoint.position, Quaternion.identity) as GameObject).GetComponent<Rail>();
+        //newRail.End = EndPoint;
+        //newRail.speed = Speed;
 
-        var newProduct = (Instantiate(ParcelPrefab, StartPoint.position + (Vector3.down / 2), Quaternion.identity) as GameObject);
-        newProduct.GetComponent<SpringJoint2D>().connectedBody = newRail.GetComponent<Rigidbody2D>();
-        newProduct.GetComponent<SpriteRenderer>().sprite = newItemType.image;
-        newProduct.tag = newItemType.tag;
+        //var newProduct = (Instantiate(ParcelPrefab, StartPoint.position + (Vector3.down / 2), Quaternion.identity) as GameObject);
+        //newProduct.GetComponent<SpringJoint2D>().connectedBody = newRail.GetComponent<Rigidbody2D>();
+        //newProduct.GetComponent<SpriteRenderer>().sprite = newItemType.image;
+        //newProduct.tag = newItemType.tag;
 
-        parcels.Add(newProduct);
+        //parcels.Add(newProduct);
 
-        return newRail.gameObject;
+        //return newRail.gameObject;
+        Debug.Log("Spawn Parcel");
+
+        return null;
     }
 
 	// Update is called once per frame
-	void Update ()
+	public void Tick ()
     {
-        
-
         if (addlDelay >= 0f)
         {
             addlDelay -= Time.deltaTime;
@@ -58,25 +56,38 @@ public class AssemblyLine : MonoBehaviour
 
         SpawnTimer += Time.deltaTime;
 
-        if (SpawnTimer >= SpawnInterval)
+        if (SpawnTimer >= _settings.SpawnInterval)
         {
-            SpawnTimer -= SpawnInterval;
-            SpawnParcel(curDatabase.data[Random.Range(0, curDatabase.data.Length)]);
+            SpawnTimer -= _settings.SpawnInterval;
+            SpawnParcel(_settings.ItemCatalog.data[UnityEngine.Random.Range(0, _settings.ItemCatalog.data.Length)]);
         }
         
 	}
 
     public void ClearExisting()
     {
-        for(int i = 0; i < parcels.Count; ++i)
-        {
-            if (parcels[i] != null)
-            {
-                Destroy(parcels[i]);
-            }
-        }
+        //for(int i = 0; i < parcels.Count; ++i)
+        //{
+        //    if (parcels[i] != null)
+        //    {
+        //        Destroy(parcels[i]);
+        //    }
+        //}
 
-        parcels.Clear();
+        //parcels.Clear();
     }
 
+    [Serializable]
+    public class Settings
+    {
+        public Transform StartPoint;
+        public Transform EndPoint;
+
+        public GameObject RailPrefab;
+        public GameObject ParcelPrefab;
+
+        public ItemDatabase ItemCatalog;
+
+        public float SpawnInterval;
+    }
 }

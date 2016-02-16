@@ -16,6 +16,7 @@ public class Statistics : ITickable, IInitializable
 
     public void Initialize()
     {
+        Debug.Log("Statistics initializing...");
         if (instance == null)
         {
             instance = this;

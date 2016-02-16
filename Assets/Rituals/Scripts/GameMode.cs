@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameMode : MonoBehaviour
+using Zenject;
+
+public class GameMode : IInitializable
 {
     public static GameMode instance;
     public AssemblyLine assem;
@@ -10,11 +12,14 @@ public class GameMode : MonoBehaviour
     public float timeToStart = 5.0f;
 
 	// Use this for initialization
-	void Start () {
+	public void Initialize ()
+    {
+        Debug.Log("GameMode Initializing...");
+
         if (instance == null)
             instance = this;
         else
-            Destroy(this);
+            Debug.LogWarning("You may have multiple GameMode objects!");
 	}
 
     public void StartGame()

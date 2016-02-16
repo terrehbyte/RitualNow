@@ -335,7 +335,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
 --- !u!231 &87126692
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -386,53 +386,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.375, y: 0.875}
---- !u!1 &87219295
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 87219297}
-  - 114: {fileID: 87219296}
-  m_Layer: 0
-  m_Name: mfgr
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &87219296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 87219295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e07eb3e0e17fa4e4ba3a89963c982cf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartPoint: {fileID: 229026197}
-  EndPoint: {fileID: 1237303625}
-  RailPrefab: {fileID: 153742, guid: 61ca713cf5633a6498ac74061566397c, type: 2}
-  ParcelPrefab: {fileID: 110310, guid: f76c17490f2e63d4c8a594548269a29a, type: 2}
-  SpawnInterval: 1
-  Speed: 3
-  curDatabase: {fileID: 11400000, guid: 929aa925e2ad33040aeef2adf64fd0a9, type: 2}
-  addlDelay: 0
---- !u!4 &87219297
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 87219295}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.695818, y: 2.7221012, z: -0.796875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
 --- !u!1 &116171959
 GameObject:
   m_ObjectHideFlags: 0
@@ -5898,7 +5851,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1291461332}
+      - m_Target: {fileID: 0}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -6525,7 +6478,7 @@ RectTransform:
   - {fileID: 183922164}
   - {fileID: 1104683688}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -6811,7 +6764,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
 --- !u!1 &927900194
 GameObject:
   m_ObjectHideFlags: 0
@@ -8391,7 +8344,7 @@ Transform:
   m_LocalScale: {x: 13, y: 14, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 14
 --- !u!1 &1206044710
 GameObject:
   m_ObjectHideFlags: 0
@@ -9189,48 +9142,6 @@ SpriteRenderer:
   m_Color: {r: 0.25735295, g: 0.25735295, b: 0.25735295, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &1291461331
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1291461333}
-  - 114: {fileID: 1291461332}
-  m_Layer: 0
-  m_Name: _GAMEMODE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1291461332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1291461331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa85994787a383438695e1372833b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  assem: {fileID: 87219296}
-  isGameActive: 0
-  timeToStart: 5
---- !u!4 &1291461333
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1291461331}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 352.61533, y: 234.15837, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
 --- !u!1 &1297256918
 GameObject:
   m_ObjectHideFlags: 0
@@ -9552,7 +9463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Step: 15
   MaxRamps: 3
-  assem: {fileID: 87219296}
   RampUpSpawnRate: 0.1
   RampUpParcelSpeed: 0.2
   TimeBetweenRamp: 7
@@ -9567,7 +9477,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 15
 --- !u!1 &1328760283
 GameObject:
   m_ObjectHideFlags: 0
@@ -10544,6 +10454,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b51d0f66612284d95fb01951aeca71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings:
+    MainCamera: {fileID: 1905127571}
+    Assembler:
+      StartPoint: {fileID: 229026197}
+      EndPoint: {fileID: 1237303625}
+      RailPrefab: {fileID: 153742, guid: 61ca713cf5633a6498ac74061566397c, type: 2}
+      ParcelPrefab: {fileID: 110310, guid: f76c17490f2e63d4c8a594548269a29a, type: 2}
+      ItemCatalog: {fileID: 11400000, guid: 929aa925e2ad33040aeef2adf64fd0a9, type: 2}
+      SpawnInterval: 2
 --- !u!114 &1463846572
 MonoBehaviour:
   m_ObjectHideFlags: 0
