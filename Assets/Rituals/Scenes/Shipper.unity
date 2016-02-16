@@ -10476,7 +10476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyInjectWhenActive: 1
-  ParentNewObjectsUnderRoot: 0
+  ParentNewObjectsUnderRoot: 1
   Installers:
   - {fileID: 1463846571}
 --- !u!4 &1463846573

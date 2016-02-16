@@ -2,9 +2,11 @@
 using System.Collections;
 
 using Zenject;
+using System;
 
 public class Statistics : ITickable, IInitializable
 {
+    [Obsolete("Use the instance provided via DI (Zenject)")]
     public static Statistics instance;
 
     public int ParcelSpawnCount;

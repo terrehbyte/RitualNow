@@ -34,22 +34,17 @@ public class AssemblyLine : ITickable
 
         var newRail = _railFactory.Create();
 
-        //var newRail = (Instantiate(RailPrefab, StartPoint.position, Quaternion.identity) as GameObject).GetComponent<Rail>();
         newRail.transform.position = _settings.StartPoint.position;
         newRail.End = _settings.EndPoint;
         newRail.speed = _settings.Speed;
 
-        //var newProduct = (Instantiate(ParcelPrefab, StartPoint.position + (Vector3.down / 2), Quaternion.identity) as GameObject);
-        //newProduct.GetComponent<SpringJoint2D>().connectedBody = newRail.GetComponent<Rigidbody2D>();
-        //newProduct.GetComponent<SpriteRenderer>().sprite = newItemType.image;
-        //newProduct.tag = newItemType.tag;
+        // HACK: can't call instantiate from in here, and it doesn't have any dependencies to inject?
+        // HACK: I might just be dumb because instantiate might be a static method I can call from here
+        var newParcel = newRail.AttachParcel(_settings.ParcelPrefab, newItemType);
 
-        //parcels.Add(newProduct);
+        parcels.Add(newParcel);
 
-        //return newRail.gameObject;
-        Debug.Log("Spawn Parcel");
-
-        return null;
+        return newRail.gameObject;
     }
 
 	// Update is called once per frame
@@ -73,15 +68,15 @@ public class AssemblyLine : ITickable
 
     public void ClearExisting()
     {
-        //for(int i = 0; i < parcels.Count; ++i)
-        //{
-        //    if (parcels[i] != null)
-        //    {
-        //        Destroy(parcels[i]);
-        //    }
-        //}
+        for (int i = 0; i < parcels.Count; ++i)
+        {
+            if (parcels[i] != null)
+            {
+                GameObject.Destroy(parcels[i]);
+            }
+        }
 
-        //parcels.Clear();
+        parcels.Clear();
     }
 
     [Serializable]
