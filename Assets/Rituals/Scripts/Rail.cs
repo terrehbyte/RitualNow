@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Zenject;
+
 public class Rail : MonoBehaviour
 {
     public float speed;
 
     public Transform End;
-
-    
 
     void FixedUpdate()
     {
@@ -16,5 +16,7 @@ public class Rail : MonoBehaviour
         transform.position += delta;
     }
 
-
+    public class Factory : GameObjectFactory<Rail>
+    {
+    }
 }

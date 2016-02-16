@@ -20,6 +20,7 @@ public class RitualInstaller : MonoInstaller
         Container.Bind<ITickable>().ToSingle<RitualRunner>();
         Container.Bind<IInitializable>().ToSingle<RitualRunner>();
 
+        Container.Bind<Statistics>().ToSingle();
         Container.Bind<ITickable>().ToSingle<Statistics>();
         Container.Bind<IInitializable>().ToSingle<Statistics>();
 
@@ -28,6 +29,8 @@ public class RitualInstaller : MonoInstaller
 
         Container.Bind<AssemblyLine>().ToSingle();
         Container.Bind<ITickable>().ToSingle<AssemblyLine>();
+
+        Container.BindGameObjectFactory<Rail.Factory>(_settings.Assembler.RailPrefab, "Rails");
     }
 
     void InstallSettings()

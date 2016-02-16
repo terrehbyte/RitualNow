@@ -16,9 +16,13 @@ public class AssemblyLine : ITickable
     [Inject]
     Settings _settings;
 
-    private float SpawnTimer;
+    [Inject]
+    Statistics stats;
 
-    public float Speed;
+    [Inject]
+    Rail.Factory _railFactory;
+
+    private float SpawnTimer;
 
     private List<GameObject> parcels = new List<GameObject>();
 
@@ -26,11 +30,14 @@ public class AssemblyLine : ITickable
 
     GameObject SpawnParcel( Item newItemType )
     {
-        //Statistics.instance.ParcelSpawnCount += 1;
+        stats.ParcelSpawnCount += 1;
+
+        var newRail = _railFactory.Create();
 
         //var newRail = (Instantiate(RailPrefab, StartPoint.position, Quaternion.identity) as GameObject).GetComponent<Rail>();
-        //newRail.End = EndPoint;
-        //newRail.speed = Speed;
+        newRail.transform.position = _settings.StartPoint.position;
+        newRail.End = _settings.EndPoint;
+        newRail.speed = _settings.Speed;
 
         //var newProduct = (Instantiate(ParcelPrefab, StartPoint.position + (Vector3.down / 2), Quaternion.identity) as GameObject);
         //newProduct.GetComponent<SpringJoint2D>().connectedBody = newRail.GetComponent<Rigidbody2D>();
@@ -88,6 +95,7 @@ public class AssemblyLine : ITickable
 
         public ItemDatabase ItemCatalog;
 
+        public float Speed;             // TODO: Consider making this a setting for the rail
         public float SpawnInterval;
     }
 }

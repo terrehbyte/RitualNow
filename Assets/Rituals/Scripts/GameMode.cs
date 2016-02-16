@@ -2,11 +2,15 @@
 using System.Collections;
 
 using Zenject;
+using System;
 
 public class GameMode : IInitializable
 {
+    [Obsolete("Use the instance provided via DI (Zenject)")]
     public static GameMode instance;
-    public AssemblyLine assem;
+
+    [Inject]
+    AssemblyLine assem;
 
     public bool isGameActive;
     public float timeToStart = 5.0f;
