@@ -6,11 +6,11 @@ using System;
 
 public class GameMode : IInitializable
 {
-    [Obsolete("Use the instance provided via DI (Zenject)")]
-    public static GameMode instance;
+    [Inject]
+    AssemblyLine _assem;
 
     [Inject]
-    AssemblyLine assem;
+    Statistics _stats;
 
     public bool isGameActive;
     public float timeToStart = 5.0f;
@@ -19,19 +19,14 @@ public class GameMode : IInitializable
 	public void Initialize ()
     {
         Debug.Log("GameMode Initializing...");
-
-        if (instance == null)
-            instance = this;
-        else
-            Debug.LogWarning("You may have multiple GameMode objects!");
 	}
 
     public void StartGame()
     {
         isGameActive = true;
-        assem.addlDelay += timeToStart;
+        _assem.addlDelay += timeToStart;
 
-        Statistics.instance.Reset();
-        assem.ClearExisting();
+        _stats.Reset();
+        _assem.ClearExisting();
     }
 }

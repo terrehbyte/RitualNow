@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Zenject;
+
 public class Packer : MonoBehaviour
 {
+    [Inject]
+    GameMode _game;
+
     public int LivesCount
     {
         get
@@ -59,7 +64,7 @@ public class Packer : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!GameMode.instance.isGameActive)
+        if (!_game.isGameActive)
         {
             return;
         }

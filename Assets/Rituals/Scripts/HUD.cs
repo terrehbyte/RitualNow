@@ -2,8 +2,13 @@
 using UnityEngine.UI;
 using System.Collections;
 
+using Zenject;
+
 public class HUD : MonoBehaviour
 {
+    [Inject]
+    Statistics _stats;
+
     public Image[] lives;
     public Packer player;
 
@@ -34,9 +39,9 @@ public class HUD : MonoBehaviour
         {
             GameOverPanel.SetActive(true);
 
-            float timeElapsed = Statistics.instance.TimeElapsed;
+            float timeElapsed = _stats.TimeElapsed;
                 
-            ParcelCount.text = Statistics.instance.ParcelPlacementCount.ToString("D3") + "/" + Statistics.instance.ParcelSpawnCount.ToString("D3");
+            ParcelCount.text = _stats.ParcelPlacementCount.ToString("D3") + "/" + _stats.ParcelSpawnCount.ToString("D3");
             TimeDisplay.text = string.Format("{0:00}:{1:00}:{2:00}", timeElapsed / 3600, (timeElapsed / 60) % 60, timeElapsed % 60);
         }
     }

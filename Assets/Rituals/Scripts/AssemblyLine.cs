@@ -17,7 +17,7 @@ public class AssemblyLine : ITickable
     Settings _settings;
 
     [Inject]
-    Statistics stats;
+    Statistics _stats;
 
     [Inject]
     Rail.Factory _railFactory;
@@ -30,7 +30,7 @@ public class AssemblyLine : ITickable
 
     GameObject SpawnParcel( Item newItemType )
     {
-        stats.ParcelSpawnCount += 1;
+        _stats.ParcelSpawnCount += 1;
 
         var newRail = _railFactory.Create();
 

@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Zenject;
+
 public class Receptacle : MonoBehaviour
 {
+    [Inject]
+    Statistics _stats;
+
     public string[] acceptedTypes;
 
     //public Color NormalColor = Color.white;
@@ -48,9 +53,9 @@ public class Receptacle : MonoBehaviour
         {
             if (other.CompareTag(type))
             {
-                Statistics.instance.ParcelPlacementCount += 1;
+                _stats.ParcelPlacementCount += 1;
 
-                if (Statistics.instance.ParcelPlacementCount % 10 == 0)
+                if (_stats.ParcelPlacementCount % 10 == 0)
                 {
                     FindObjectOfType<Packer>().TakeDamage(-1);
                 }

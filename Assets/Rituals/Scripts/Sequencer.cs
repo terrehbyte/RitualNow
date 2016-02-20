@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Zenject;
+
 public class Sequencer : MonoBehaviour
 {
+    [Inject]
+    GameMode _game;
+
     private float Accumulator;
     public float Step = 15.0f;
 
@@ -16,7 +21,7 @@ public class Sequencer : MonoBehaviour
 
     void Update()
     {
-        if (!GameMode.instance.isGameActive)
+        if (!_game.isGameActive)
             return;
 
         if (MaxRamps <= 0)
