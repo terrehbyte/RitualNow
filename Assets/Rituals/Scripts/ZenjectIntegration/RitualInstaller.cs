@@ -9,6 +9,9 @@ public class RitualInstaller : MonoInstaller
     [SerializeField]
     Settings _settings = null;
 
+    [SerializeField]
+    Packer _packerInstance = null;
+
     public override void InstallBindings()
     {
         InstallSettings();
@@ -31,6 +34,8 @@ public class RitualInstaller : MonoInstaller
         Container.Bind<ITickable>().ToSingle<AssemblyLine>();
 
         Container.BindGameObjectFactory<Rail.Factory>(_settings.Assembler.RailPrefab, "Rails");
+
+        Container.Bind<Packer>().ToInstance(_packerInstance);
     }
 
     void InstallSettings()

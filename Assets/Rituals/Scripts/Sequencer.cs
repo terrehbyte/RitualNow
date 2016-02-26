@@ -8,6 +8,12 @@ public class Sequencer : MonoBehaviour
     [Inject]
     GameMode _game;
 
+    [Inject]
+    AssemblyLine _assem;
+
+    [Inject]
+    AssemblyLine.Settings _assemSettings;
+
     private float Accumulator;
     public float Step = 15.0f;
 
@@ -45,9 +51,9 @@ public class Sequencer : MonoBehaviour
         MaxRamps -= 1;
 
         Accumulator -= TimeBetweenRamp;
-        assem.addlDelay += TimeBetweenRamp;
 
-        //assem.SpawnInterval -= RampUpSpawnRate;
-        //assem.Speed += RampUpParcelSpeed;
+        _assem.addlDelay += TimeBetweenRamp;
+        _assemSettings.SpawnInterval -= RampUpSpawnRate;
+        _assemSettings.Speed += RampUpParcelSpeed;
     }
 }

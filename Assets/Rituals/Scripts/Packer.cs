@@ -56,8 +56,6 @@ public class Packer : MonoBehaviour
 
     void Start()
     {
-        //Cursor.visible = false;
-
         anchor = GetComponent<SpringJoint2D>();
         anchor.enabled = false;
     }

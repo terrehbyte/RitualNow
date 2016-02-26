@@ -69,6 +69,10 @@ public class Receptacle : MonoBehaviour
         {
             FindObjectOfType<Packer>().TakeDamage(1);
         }
+        else
+        {
+            _stats.Score += 10; // TODO: different values for diff packs
+        }
 
         Destroy(other.gameObject);
     }

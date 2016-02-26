@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 using Zenject;
@@ -9,8 +10,10 @@ public class HUD : MonoBehaviour
     [Inject]
     Statistics _stats;
 
+    [Inject]
+    Packer player;
+
     public Image[] lives;
-    public Packer player;
 
     public Color heartActive;
     public Color heartInactive;
@@ -19,8 +22,9 @@ public class HUD : MonoBehaviour
 
     public Text ParcelCount;
     public Text TimeDisplay;
+    public Text ScoreDisplay;
 
-    void Update()
+    void FixedUpdate()
     {
         // Lives
         for (int i = 0; i < lives.Length; ++i)
@@ -35,6 +39,9 @@ public class HUD : MonoBehaviour
             }
         }
 
+        // Score
+        ScoreDisplay.text = _stats.Score.ToString("D8");
+
         if (player.LivesCount <= 0 && !GameOverPanel.activeInHierarchy)
         {
             GameOverPanel.SetActive(true);
@@ -46,16 +53,16 @@ public class HUD : MonoBehaviour
         }
     }
 
-    // utility functiosn
+    // utility functions
+
     public void ReloadLevel()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 
     public void LoadLevel(string level)
     {
-        Application.LoadLevel(level);
+        SceneManager.LoadScene(level);
     }
 
     public void QuitGame()

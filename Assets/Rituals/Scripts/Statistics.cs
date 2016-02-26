@@ -13,6 +13,8 @@ public class Statistics : ITickable, IInitializable
 
     public bool ShouldReplaceInstance;
 
+    public int Score;
+
     public void Initialize()
     {
         Debug.Log("Statistics initializing...");
