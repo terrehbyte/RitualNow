@@ -8,10 +8,10 @@ public class Receptacle : MonoBehaviour
     [Inject]
     Statistics _stats;
 
-    public string[] acceptedTypes;
+    [Inject]
+    Packer     _player;
 
-    //public Color NormalColor = Color.white;
-    //public Color HoverColor = Color.green;
+    public string[] acceptedTypes;
 
     private SpriteRenderer spriteRen;
 
@@ -21,28 +21,6 @@ public class Receptacle : MonoBehaviour
     void Start()
     {
         spriteRen = GetComponent<SpriteRenderer>();
-
-        PickNewDesiredResult();
-    }
-
-    //void OnMouseOver()
-    //{
-    //    spriteRen.color = HoverColor;
-    //}
-
-    //void OnMouseExit()
-    //{
-    //    spriteRen.color = NormalColor;
-    //}
-
-    void PickNewDesiredResult()
-    {
-
-    }
-
-    void Update()
-    {
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +35,7 @@ public class Receptacle : MonoBehaviour
 
                 if (_stats.ParcelPlacementCount % 10 == 0)
                 {
-                    FindObjectOfType<Packer>().TakeDamage(-1);
+                    _player.TakeDamage(-1);
                 }
 
                 validDrop = true;
@@ -67,7 +45,7 @@ public class Receptacle : MonoBehaviour
 
         if (!validDrop)
         {
-            FindObjectOfType<Packer>().TakeDamage(1);
+            _player.TakeDamage(1);
         }
         else
         {
@@ -76,5 +54,4 @@ public class Receptacle : MonoBehaviour
 
         Destroy(other.gameObject);
     }
-
 }
