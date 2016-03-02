@@ -13,6 +13,9 @@ public class HUD : MonoBehaviour
     [Inject]
     Packer player;
 
+    [Inject]
+    GameMode _game;
+
     public Image[] lives;
 
     public Color heartActive;
@@ -51,6 +54,11 @@ public class HUD : MonoBehaviour
             ParcelCount.text = _stats.ParcelPlacementCount.ToString("D3") + "/" + _stats.ParcelSpawnCount.ToString("D3");
             TimeDisplay.text = string.Format("{0:00}:{1:00}:{2:00}", timeElapsed / 3600, (timeElapsed / 60) % 60, timeElapsed % 60);
         }
+    }
+
+    public void StartGame()
+    {
+        _game.StartGame();
     }
 
     // utility functions

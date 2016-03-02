@@ -14,7 +14,6 @@ public class KillBox : MonoBehaviour {
 
         if (coll.tag != "Untagged")
         {
-            Debug.Log("DAM");
             player.TakeDamage(1);
         }
     }

@@ -23,6 +23,8 @@ public class RitualInstaller : MonoInstaller
         Container.Bind<ITickable>().ToSingle<RitualRunner>();
         Container.Bind<IInitializable>().ToSingle<RitualRunner>();
 
+        Container.Bind<ICvarStorable>().ToSingle<LunarCvars>();
+
         Container.Bind<Statistics>().ToSingle();
         Container.Bind<ITickable>().ToSingle<Statistics>();
         Container.Bind<IInitializable>().ToSingle<Statistics>();

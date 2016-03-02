@@ -19,6 +19,9 @@ public class AssemblyLine : ITickable
     [Inject]
     Statistics _stats;
 
+    [Inject]
+    ICvarStorable _cvars;
+
     private float SpawnTimer;
 
     private List<GameObject> parcels = new List<GameObject>();
@@ -33,7 +36,7 @@ public class AssemblyLine : ITickable
 
         newRail.transform.position = _settings.StartPoint.position;
         newRail.End = _settings.EndPoint;
-        newRail.speed = _settings.Speed;
+        newRail.speed = _cvars.GetFloat("sv_assembler_speed");
 
         // HACK: can't call instantiate from in here, and it doesn't have any dependencies to inject?
         // HACK: I might just be dumb because instantiate might be a static method I can call from here
