@@ -19,9 +19,6 @@ public class AssemblyLine : ITickable
     [Inject]
     Statistics _stats;
 
-    [Inject]
-    Rail.Factory _railFactory;
-
     private float SpawnTimer;
 
     private List<GameObject> parcels = new List<GameObject>();
@@ -32,7 +29,7 @@ public class AssemblyLine : ITickable
     {
         _stats.ParcelSpawnCount += 1;
 
-        var newRail = _railFactory.Create();
+        var newRail = GameObject.Instantiate(_settings.RailPrefab).GetComponent<Rail>();
 
         newRail.transform.position = _settings.StartPoint.position;
         newRail.End = _settings.EndPoint;

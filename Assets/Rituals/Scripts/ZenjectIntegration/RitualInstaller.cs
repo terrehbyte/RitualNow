@@ -33,8 +33,6 @@ public class RitualInstaller : MonoInstaller
         Container.Bind<AssemblyLine>().ToSingle();
         Container.Bind<ITickable>().ToSingle<AssemblyLine>();
 
-        Container.BindGameObjectFactory<Rail.Factory>(_settings.Assembler.RailPrefab, "Rails");
-
         Container.Bind<Packer>().ToInstance(_packerInstance);
     }
 

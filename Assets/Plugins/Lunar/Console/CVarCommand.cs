@@ -479,6 +479,16 @@ namespace LunarPluginInternal
             get { return cvar.IsBool; }
         }
 
+        public bool IsColor
+        {
+            get { return cvar.IsColor; }
+        }
+
+        public bool IsRect
+        {
+            get { return cvar.IsRect; }
+        }
+
         public bool IsDefault
         {
             get { return cvar.IsDefault; }
