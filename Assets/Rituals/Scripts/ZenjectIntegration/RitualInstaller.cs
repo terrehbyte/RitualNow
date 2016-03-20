@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 
 using Zenject;
+using TBYTEConsole;
 
 public class RitualInstaller : MonoInstaller
 {
@@ -22,6 +23,7 @@ public class RitualInstaller : MonoInstaller
     {
         Container.Bind<ITickable>().ToSingle<RitualRunner>();
         Container.Bind<IInitializable>().ToSingle<RitualRunner>();
+        //Container.Bind<CVarRegistry>().ToSingle(); // TODO: Is there a nice of way of integrating this? hmm...
 
         Container.Bind<Statistics>().ToSingle();
         Container.Bind<ITickable>().ToSingle<Statistics>();
