@@ -33,30 +33,10 @@ namespace TBYTEConsole
         }
     }
 
-    public static class StockConsoleCommands
-    {
-        static StockConsoleCommands()
-        {
-            new CCommand("clear", clearCmd);
-        }
-
-        private static CCommand clear = new CCommand("clear", clearCmd);
-        private static string clearCmd(int argc, string[] argv)
-        {
-            Console.ClearHistory();
-            return string.Empty;
-        }
-    }
-
     public static class Console
     {
-        static Console()
-        {
-            Debug.Log("Yes");
-        }
-
         private static List<CCommand> commands = new List<CCommand>();
-        private static string consoleHistory;
+        private static string consoleHistory;   // HACK: not sure who should have this
 
         public static void Register(CCommand newCommand)
         {
@@ -65,7 +45,7 @@ namespace TBYTEConsole
 
         private static string ProcessCommand(string command, int argc, string[] argv)
         {
-            foreach(var cmd in commands)
+            foreach(var cmd in CCommand.commands)
             {
                 if (cmd.cmd == command)
                 {
@@ -84,7 +64,8 @@ namespace TBYTEConsole
             string[] args = command.Substring(input[0].Length).Split(' ');
             // HACK: Can't think, too many annoying people in the background
 
-            consoleHistory += ProcessCommand(input[0], args.Length, args) + "\n";
+            // HACK: Now there's always a space at the beginning of the console...
+            consoleHistory += "\n" + ProcessCommand(input[0], args.Length, args);
 
             return consoleHistory;
         }
