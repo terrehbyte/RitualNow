@@ -1,49 +1,41 @@
 ﻿using UnityEngine;
-using System;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-using System.Collections;
-
-
+using System.Text;
 
 namespace TBYTEConsole
 {
-#if UNITY_EDITOR
-    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public class InitializeMethodOnStartup : UnityEditor.InitializeOnLoadMethodAttribute
-    {
-        public InitializeMethodOnStartup() : base()
-        {
-
-        }
-    }
-#else
-    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public class InitializeMethodOnStartup : UnityEngine.RuntimeInitializeOnLoadMethodAttribute
-    {
-        public InitializeMethodOnStartup() : base()
-        {
-
-        }
-    }
-#endif
-
-
     public static class StockCommandDefinition
     {
-        // hack: this is a terrible method
+        // TODO: Find a better way to handle this!
 
         [InitializeMethodOnStartup]
         public static void Register()
         {
             CCommand cmd = new CCommand("clear", clearCmd);
-            Debug.Log("Stock commands added.");
+            CCommand echo = new CCommand("echo", echoCmd);
         }
 
         private static string clearCmd(int argc, string[] argv)
         {
             Console.ClearHistory();
+            return string.Empty;
+        }
+
+        private static string echoCmd(int argc, string[] argv)
+        {
+            StringBuilder bldr = new StringBuilder();
+
+            foreach(var arg in argv)
+            {
+                bldr.Append(arg);
+                bldr.Append(' ');
+            }
+
+            return bldr.ToString();
+        }
+
+        private static string condumpCmd(int argc, string[] argv)
+        {
+            //Application.persistentDataPath;
             return string.Empty;
         }
     }

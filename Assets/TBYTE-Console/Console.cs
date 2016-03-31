@@ -57,21 +57,36 @@ namespace TBYTEConsole
         }
         public static string ProcessConsoleInput(string command)
         {
+            // blank? send it back
             if (string.IsNullOrEmpty(command))
                 return "";
 
-            string[] input = command.Split(' ');
-            string[] args = command.Substring(input[0].Length).Split(' ');
-            // HACK: Can't think, too many annoying people in the background
+            command.Trim();
 
-            // HACK: Now there's always a space at the beginning of the console...
-            consoleHistory += "\n" + ProcessCommand(input[0], args.Length, args);
+            // split into command and args
+            string[] input = command.Split(' ');
+            string[] args = command.Substring(input[0].Length).Trim().Split(' ');
+
+            if (string.IsNullOrEmpty(input[0]))
+                return "";
+
+            // echo command back to console
+            consoleHistory += "\n>" + command;
+
+            // HACK: why does this work
+            // if I modify consoleHistory while its += is being evaluated, it gets written back
+            string result = ProcessCommand(input[0], args.Length, args);
+            if (!string.IsNullOrEmpty(result))
+            {
+                consoleHistory += "\n" + result;
+            }
 
             return consoleHistory;
         }
-        public static void ClearHistory()
+        public static string ClearHistory()
         {
             consoleHistory = string.Empty;
+            return string.Empty;
         }
     }
 }
