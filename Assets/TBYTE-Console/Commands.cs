@@ -35,7 +35,8 @@ namespace TBYTEConsole
 
         private static string condumpCmd(int argc, string[] argv)
         {
-            //Application.persistentDataPath;
+            throw new System.NotImplementedException();
+
             return string.Empty;
         }
     }

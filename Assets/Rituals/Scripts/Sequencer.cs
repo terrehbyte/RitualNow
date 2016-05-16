@@ -3,8 +3,8 @@ using System.Collections;
 
 using Zenject;
 
-public class Sequencer : MonoBehaviour
-{
+public class Sequencer : ITickable
+{ 
     [Inject]
     GameMode _game;
 
@@ -25,7 +25,7 @@ public class Sequencer : MonoBehaviour
 
     public float TimeBetweenRamp = 7.0f;
 
-    void Update()
+    public void Tick()
     {
         if (!_game.isGameActive)
             return;

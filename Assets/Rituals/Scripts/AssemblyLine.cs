@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+
+using System;
 using System.Collections.Generic;
 
 using Zenject;
-using System;
-
-[System.Serializable]
-public class Wave
-{
-    public int count;
-}
 
 public class AssemblyLine : ITickable
 {
