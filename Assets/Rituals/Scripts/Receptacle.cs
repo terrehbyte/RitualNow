@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using UnityEngine.Events;
 
 using Zenject;
+
+[System.Serializable]
+public class ItemSetDisplay
+{
+    public Sprite AcceptedIcon;
+    public string AcceptedTag;
+}
 
 public class Receptacle : MonoBehaviour
 {
@@ -11,25 +20,28 @@ public class Receptacle : MonoBehaviour
     [Inject]
     Packer     _player;
 
-    public string[] acceptedTypes;
-
-    private SpriteRenderer spriteRen;
+    public ItemSetDisplay[] AcceptedItems;
 
     [SerializeField]
     private SpriteRenderer desiredItemImage;
 
-    void Start()
+    private int NumberAccepted;
+    public int NumberNeeded = 1;
+
+    public UnityEvent OnReceptacleFull = new UnityEvent();
+
+    void Scramble()
     {
-        spriteRen = GetComponent<SpriteRenderer>();
+        Debug.Log("Should scramble");
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         bool validDrop = false;
 
-        foreach(var type in acceptedTypes)
+        foreach(var type in AcceptedItems)
         {
-            if (other.CompareTag(type))
+            if (other.CompareTag(type.AcceptedTag))
             {
                 _stats.ParcelPlacementCount += 1;
 
@@ -50,6 +62,12 @@ public class Receptacle : MonoBehaviour
         else
         {
             _stats.Score += 10; // TODO: different values for diff packs
+            NumberAccepted += 1;
+
+            if (NumberAccepted >= NumberNeeded)
+            {
+                OnReceptacleFull.Invoke();
+            }
         }
 
         Destroy(other.gameObject);
