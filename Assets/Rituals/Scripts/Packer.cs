@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 using Zenject;
 
@@ -7,6 +8,9 @@ public class Packer : MonoBehaviour
 {
     [Inject]
     GameMode _game;
+
+    [Inject]
+    AssemblyLine _assemblyLine;
 
     public int LivesCount
     {
@@ -24,8 +28,6 @@ public class Packer : MonoBehaviour
     [SerializeField]
     private int _livesCount = 3;
 
-    public LayerMask PickerMask;
-
     private SpringJoint2D anchor;
 
     public Rigidbody2D picked
@@ -38,12 +40,12 @@ public class Packer : MonoBehaviour
         {
             anchor.enabled = null != value;
             anchor.connectedBody = value;
-
+            
             _picked = value;
 
             if (_picked != null)
             {
-                //Debug.Log(_picked.gameObject.name);
+                _picked.velocity = Vector2.zero;
                 pickedRBData = new RigidData(_picked);
                 _picked.gravityScale = 0f;
             }
@@ -52,7 +54,10 @@ public class Packer : MonoBehaviour
     private Rigidbody2D _picked;
     private RigidData pickedRBData;
 
-    
+    [SerializeField]
+    [Tooltip("Maximum distance between click location and parcel. Measured in units.")]
+    private float PickerRadius = 2f; // TODO: should this go here?
+    // TODO: This should be in addition to the radius of the object as a whole...
 
     void Start()
     {
@@ -70,31 +75,41 @@ public class Packer : MonoBehaviour
         LivesCount -= damage;
     }
 
+    GameObject TryPickParcel(Vector2 mousePosition)
+    {
+        Vector2 mousePositionInWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (!(_assemblyLine.Parcels.Count > 0))
+            return null;
+
+        var validParcelList = _assemblyLine.Parcels.Where(x => x != null).ToList();
+        var closestParcel = validParcelList.OrderBy(x => Vector2.Distance(x.transform.position, mousePositionInWorldSpace)).First();
+
+        float distance = Vector2.Distance(mousePositionInWorldSpace, closestParcel.transform.position);
+
+        return distance < PickerRadius ? closestParcel : null;
+    }
+
     void Update()
     {
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
         //Cursor.visible = false;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        // TODO: build input manager + support for multiple touches where possible
         if (Input.GetMouseButtonDown(0))
         {
-            
+            GameObject pickedObject = TryPickParcel(Input.mousePosition);
 
-            //Debug.Log("Searching..");
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green);
-
-            var hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, PickerMask);
-
-            if (hit)
+            if (pickedObject != null)
             {
-                //Debug.LogWarning("Hit something!");
-                var targetRbody = hit.collider.GetComponent<Rigidbody2D>();
+                var targetRbody = pickedObject.GetComponent<Rigidbody2D>();
 
                 if (null != targetRbody)
                 {
                     picked = targetRbody;
                 }
 
-                Interactor interactor = hit.collider.GetComponent<Interactor>();
+                Interactor interactor = pickedObject.GetComponent<Interactor>();
                 if (null != interactor)
                 {
                     interactor.DoInteraction();
@@ -109,14 +124,11 @@ public class Packer : MonoBehaviour
         }
         else if (Input.GetMouseButton(0) && picked != null) // move to new position
         {
-            //Debug.Log(Input.mousePosition + Vector3.back * _originalZLevel);
-            //picked.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
+            picked.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
             
         }
 
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
-
-        //transform.position = ray.origin - Vector3.back * 2f;
+        
     }
 
 }

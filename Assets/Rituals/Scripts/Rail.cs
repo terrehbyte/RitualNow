@@ -22,6 +22,7 @@ public class Rail : MonoBehaviour
         newProduct.GetComponent<SpringJoint2D>().connectedBody = transform.GetComponent<Rigidbody2D>();
         newProduct.GetComponent<SpriteRenderer>().sprite = itemType.image;
         newProduct.tag = itemType.tag;
+        newProduct.name += itemType.tag;
 
         return newProduct;
     }

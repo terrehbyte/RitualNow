@@ -15,7 +15,18 @@ public class AssemblyLine : ITickable
 
     private float SpawnTimer;
 
-    private List<GameObject> parcels = new List<GameObject>();
+    public List<GameObject> Parcels
+    {
+        get
+        {
+            return _Parcels;
+        }
+        private set
+        {
+            _Parcels = value;
+        }
+    }
+    private List<GameObject> _Parcels = new List<GameObject>();
 
     public float addlDelay;
 
@@ -33,7 +44,7 @@ public class AssemblyLine : ITickable
         // HACK: I might just be dumb because instantiate might be a static method I can call from here
         var newParcel = newRail.AttachParcel(_settings.ParcelPrefab, newItemType);
 
-        parcels.Add(newParcel);
+        Parcels.Add(newParcel);
 
         return newRail.gameObject;
     }
@@ -59,15 +70,15 @@ public class AssemblyLine : ITickable
 
     public void ClearExisting()
     {
-        for (int i = 0; i < parcels.Count; ++i)
+        for (int i = 0; i < Parcels.Count; ++i)
         {
-            if (parcels[i] != null)
+            if (Parcels[i] != null)
             {
-                GameObject.Destroy(parcels[i]);
+                GameObject.Destroy(Parcels[i]);
             }
         }
 
-        parcels.Clear();
+        Parcels.Clear();
     }
 
     [Serializable]

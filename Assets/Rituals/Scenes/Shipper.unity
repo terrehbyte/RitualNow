@@ -291,9 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _livesCount: 10
-  PickerMask:
-    serializedVersion: 2
-    m_Bits: 1024
+  PickerRadius: 2
 --- !u!212 &87126690
 SpriteRenderer:
   m_ObjectHideFlags: 0
