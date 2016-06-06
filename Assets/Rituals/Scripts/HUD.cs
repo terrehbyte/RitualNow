@@ -16,52 +16,29 @@ public class HUD : MonoBehaviour
     [Inject]
     GameMode _game;
 
-    public Image[] lives;
-
-    public Color heartActive;
-    public Color heartInactive;
-
     public GameObject GameOverPanel;
 
-    public Text ParcelCount;
-    public Text TimeDisplay;
     public Text ScoreDisplay;
+    public Text LivesDisplay;
 
     void FixedUpdate()
     {
-        // Lives
-        for (int i = 0; i < lives.Length; ++i)
-        {
-            if (i < player.LivesCount)
-            {
-                lives[i].color = heartActive; 
-            }
-            else
-            {
-                lives[i].color = heartInactive;
-            }
-        }
-
-        // Score
+        LivesDisplay.text = player.LivesCount.ToString("D2");
         ScoreDisplay.text = _stats.Score.ToString("D8");
 
+        // Display game over panel w/ statistics
         if (player.LivesCount <= 0 && !GameOverPanel.activeInHierarchy)
         {
             GameOverPanel.SetActive(true);
-
-            float timeElapsed = _stats.TimeElapsed;
-                
-            ParcelCount.text = _stats.ParcelPlacementCount.ToString("D3") + "/" + _stats.ParcelSpawnCount.ToString("D3");
-            TimeDisplay.text = string.Format("{0:00}:{1:00}:{2:00}", timeElapsed / 3600, (timeElapsed / 60) % 60, timeElapsed % 60);
         }
     }
+
+    // utility functions
 
     public void StartGame()
     {
         _game.StartGame();
     }
-
-    // utility functions
 
     public void ReloadLevel()
     {
