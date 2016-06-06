@@ -23,6 +23,8 @@ public class Receptacle : MonoBehaviour
     public ItemSetDisplay[] AcceptedItems;
 
     [SerializeField]
+    private string CurrentAcceptedType;
+    [SerializeField]
     private SpriteRenderer desiredItemImage;
 
     private int NumberAccepted;
@@ -30,29 +32,30 @@ public class Receptacle : MonoBehaviour
 
     public UnityEvent OnReceptacleFull = new UnityEvent();
 
-    void Scramble()
+    public void Scramble()
     {
-        Debug.Log("Should scramble");
+        NumberAccepted = 0;
+
+        ItemSetDisplay newAcceptedItem = AcceptedItems[Random.Range(0, AcceptedItems.Length - 1)];
+
+        desiredItemImage.sprite = newAcceptedItem.AcceptedIcon;
+        CurrentAcceptedType = newAcceptedItem.AcceptedTag;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         bool validDrop = false;
 
-        foreach(var type in AcceptedItems)
+        if (other.CompareTag(CurrentAcceptedType))
         {
-            if (other.CompareTag(type.AcceptedTag))
+            _stats.ParcelPlacementCount += 1;
+
+            if (_stats.ParcelPlacementCount % 10 == 0)
             {
-                _stats.ParcelPlacementCount += 1;
-
-                if (_stats.ParcelPlacementCount % 10 == 0)
-                {
-                    _player.TakeDamage(-1);
-                }
-
-                validDrop = true;
-                break;
+                _player.TakeDamage(-1);
             }
+
+            validDrop = true;
         }
 
         if (!validDrop)

@@ -6,6 +6,7 @@ public class Elevator : MonoBehaviour
     public Transform StartPoint;
     public Transform EndPoint;
 
+    public float WaitTime = 1.0f;
     public float TimeToTravel = 1.0f;
     public bool Traveling
     {
@@ -29,7 +30,7 @@ public class Elevator : MonoBehaviour
     {
         StartCoroutine(StartTraveling(AtStartPoint ? EndPoint.position : StartPoint.position, TimeToTravel));
         AtStartPoint = !AtStartPoint;
-    } 
+    }
 
     IEnumerator StartTraveling(Vector3 goalPosition, float travelTime)
     {
@@ -48,5 +49,13 @@ public class Elevator : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         Traveling = false;
+
+        // return to start point if applicable
+        if (!AtStartPoint)
+        {
+            yield return new WaitForSeconds(WaitTime);
+
+            Toggle();
+        }
     }
 }
