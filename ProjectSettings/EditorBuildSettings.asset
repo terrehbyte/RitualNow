@@ -6,4 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Rituals/Scenes/MainMenu.unity
+  - enabled: 1
     path: Assets/Rituals/Scenes/Shipper.unity

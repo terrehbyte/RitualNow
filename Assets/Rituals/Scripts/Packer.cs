@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 
 using Zenject;
+using System;
 
 public class Packer : MonoBehaviour
 {
@@ -83,11 +84,19 @@ public class Packer : MonoBehaviour
             return null;
 
         var validParcelList = _assemblyLine.Parcels.Where(x => x != null).ToList();
-        var closestParcel = validParcelList.OrderBy(x => Vector2.Distance(x.transform.position, mousePositionInWorldSpace)).First();
+        try
+        {
+            var closestParcel = validParcelList.OrderBy(x => Vector2.Distance(x.transform.position, mousePositionInWorldSpace)).First();
+            float distance = Vector2.Distance(mousePositionInWorldSpace, closestParcel.transform.position);
 
-        float distance = Vector2.Distance(mousePositionInWorldSpace, closestParcel.transform.position);
+            return distance < PickerRadius ? closestParcel : null;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(ex.Message);
+        }
 
-        return distance < PickerRadius ? closestParcel : null;
+        return null;
     }
 
     void Update()

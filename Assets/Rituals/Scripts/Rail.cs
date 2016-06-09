@@ -23,6 +23,8 @@ public class Rail : MonoBehaviour
         newProduct.GetComponent<SpriteRenderer>().sprite = itemType.image;
         newProduct.tag = itemType.tag;
         newProduct.name += itemType.tag;
+        newProduct.GetComponent<ItemIdentifier>().item = itemType;
+
 
         return newProduct;
     }

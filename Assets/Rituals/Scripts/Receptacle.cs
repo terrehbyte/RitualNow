@@ -22,7 +22,6 @@ public class Receptacle : MonoBehaviour
 
     public ItemSetDisplay[] AcceptedItems;
 
-    [SerializeField]
     private string CurrentAcceptedType;
     [SerializeField]
     private SpriteRenderer desiredItemImage;
@@ -31,6 +30,11 @@ public class Receptacle : MonoBehaviour
     public int NumberNeeded = 1;
 
     public UnityEvent OnReceptacleFull = new UnityEvent();
+
+    public void Start()
+    {
+        Scramble();
+    }
 
     public void Scramble()
     {
@@ -46,7 +50,14 @@ public class Receptacle : MonoBehaviour
     {
         bool validDrop = false;
 
-        if (other.CompareTag(CurrentAcceptedType))
+        var itemID = other.GetComponent<ItemIdentifier>();
+
+        if (itemID == null)
+        {
+            return;
+        }
+
+        if (itemID.item.tag == CurrentAcceptedType)
         {
             _stats.ParcelPlacementCount += 1;
 
