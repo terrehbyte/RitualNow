@@ -4,6 +4,7 @@ using System.Collections;
 [System.Serializable]
 public struct Item
 {
+    // TODO: tag is a bad name for this. should be enumerated in an enum anyway
     public string tag;
     public Sprite image;
 }

@@ -13,6 +13,9 @@ public class RitualInstaller : MonoInstaller
     [SerializeField]
     Packer _packerInstance = null;
 
+    [SerializeField]
+    ItemDatabase _itemCatalog = null;
+
     public override void InstallBindings()
     {
         InstallSettings();
@@ -39,6 +42,7 @@ public class RitualInstaller : MonoInstaller
         Container.Bind<ITickable>().ToSingle<Sequencer>();
 
         Container.Bind<Packer>().ToInstance(_packerInstance);
+        Container.Bind<ItemDatabase>().ToInstance(_itemCatalog);
     }
 
     void InstallSettings()
@@ -56,9 +60,16 @@ public class RitualInstaller : MonoInstaller
 
 public class RitualRunner : ITickable, IInitializable
 {
+    [Inject]
+    ItemDatabase _itemCatalog;
+
+    [Inject]
+    AssemblyLine.Settings _assembler;
+
     public void Initialize()
     {
         Debug.Log("Runner Initializing...");
+        Debug.Assert(_assembler.ItemCatalog == _itemCatalog, "These items should be identical!");
     }
 
     public void Tick()

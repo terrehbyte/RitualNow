@@ -90,6 +90,8 @@ public class AssemblyLine : ITickable
         public GameObject RailPrefab;
         public GameObject ParcelPrefab;
 
+        // HACK: Make sure this is the same as the one specified in the Zenject installer
+        [Obsolete("Please have the ItemCatalog injected via Zenject instead.")]
         public ItemDatabase ItemCatalog;
 
         public float Speed;             // TODO: Consider making this a setting for the rail

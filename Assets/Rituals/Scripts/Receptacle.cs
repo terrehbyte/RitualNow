@@ -6,11 +6,7 @@ using UnityEngine.Events;
 using Zenject;
 
 [System.Serializable]
-public class ItemSetDisplay
-{
-    public Sprite AcceptedIcon;
-    public string AcceptedTag;
-}
+public class ItemEvent : UnityEvent<Item, int> { }
 
 public class Receptacle : MonoBehaviour
 {
@@ -20,15 +16,32 @@ public class Receptacle : MonoBehaviour
     [Inject]
     Packer     _player;
 
-    public ItemSetDisplay[] AcceptedItems;
+    [Inject]
+    ItemDatabase _items;
 
-    private string CurrentAcceptedType;
+    // TODO: change this to use ItemHandle objects, which are fancy resolvers for item IDs
+    // TODO: this means implement ItemHandle so you can have ONE location for items...
+    // TODO: OR, expose the ItemStore to Zenject and have that injected instead...
     [SerializeField]
-    private SpriteRenderer desiredItemImage;
+    private int[] AcceptedItems;
+    private Item CurrentAcceptedItem;
 
+    // help this naming is bonkers
     private int NumberAccepted;
-    public int NumberNeeded = 1;
+    public int NumberDesired = 2;
 
+    public int NumberNeeded
+    {
+        get
+        {
+            return NumberDesired - NumberAccepted;
+        }
+    }
+
+    // Called when the receptacle's conditions have changed.
+    // - arg0 :: Item needed
+    // - arg1 :: Qty needed
+    public ItemEvent OnReceptacleChange = new ItemEvent();
     public UnityEvent OnReceptacleFull = new UnityEvent();
 
     public void Start()
@@ -39,11 +52,8 @@ public class Receptacle : MonoBehaviour
     public void Scramble()
     {
         NumberAccepted = 0;
-
-        ItemSetDisplay newAcceptedItem = AcceptedItems[Random.Range(0, AcceptedItems.Length - 1)];
-
-        desiredItemImage.sprite = newAcceptedItem.AcceptedIcon;
-        CurrentAcceptedType = newAcceptedItem.AcceptedTag;
+        CurrentAcceptedItem = _items.data[AcceptedItems[Random.Range(0, AcceptedItems.Length - 1)]];
+        OnReceptacleChange.Invoke(CurrentAcceptedItem, NumberNeeded);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +67,7 @@ public class Receptacle : MonoBehaviour
             return;
         }
 
-        if (itemID.item.tag == CurrentAcceptedType)
+        if (itemID.item.tag == CurrentAcceptedItem.tag)
         {
             _stats.ParcelPlacementCount += 1;
 
@@ -78,7 +88,9 @@ public class Receptacle : MonoBehaviour
             _stats.Score += 10; // TODO: different values for diff packs
             NumberAccepted += 1;
 
-            if (NumberAccepted >= NumberNeeded)
+            OnReceptacleChange.Invoke(CurrentAcceptedItem, NumberNeeded);
+
+            if (NumberAccepted >= NumberDesired)
             {
                 OnReceptacleFull.Invoke();
             }
