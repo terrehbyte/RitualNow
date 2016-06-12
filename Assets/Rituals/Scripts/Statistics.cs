@@ -11,8 +11,6 @@ public class Statistics : ITickable, IInitializable
 
     public float TimeElapsed;
 
-    public bool ShouldReplaceInstance;
-
     public int Score;
 
     public void Initialize()
@@ -29,6 +27,7 @@ public class Statistics : ITickable, IInitializable
     {
         ParcelSpawnCount = 0;
         ParcelPlacementCount = 0;
+        Score = 0;
 
         TimeElapsed = 0;
     }

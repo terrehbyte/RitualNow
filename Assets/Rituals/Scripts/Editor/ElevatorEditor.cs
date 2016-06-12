@@ -11,7 +11,7 @@ public class ElevatorEditor : Editor
 
         var script = (Elevator)target;
 
-        if(GUILayout.Button("Toggle"))
+        if(GUILayout.Button("Toggle") && Application.isPlaying)
         {
             script.Toggle();
         }
