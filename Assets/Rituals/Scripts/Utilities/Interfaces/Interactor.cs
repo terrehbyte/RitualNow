@@ -2,12 +2,18 @@
 using System.Collections;
 using System;
 
-public class Interactor : MonoBehaviour
-{
-    public event EventHandler<InteractArgs> Interaction;
+using RitualWarehouse.Extensions;
 
-    public void DoInteraction()
+namespace RitualWarehouse
+{
+    public class Interactor : MonoBehaviour
     {
-        Interaction.Raise(this, new InteractArgs(InteractEventState.BEGIN));
+        public event EventHandler<InteractArgs> Interaction;
+
+        public void DoInteraction()
+        {
+            Interaction.Raise(this, new InteractArgs(InteractEventState.BEGIN));
+        }
     }
+
 }

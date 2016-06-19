@@ -2,6 +2,8 @@
 using UnityEditor;
 using System.Collections;
 
+using RitualWarehouse;
+
 [CustomEditor(typeof(Elevator))]
 public class ElevatorEditor : Editor
 {

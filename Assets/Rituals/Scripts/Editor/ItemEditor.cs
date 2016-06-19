@@ -2,6 +2,8 @@
 using UnityEditor;
 using System.Collections;
 
+using RitualWarehouse;
+
 [CustomPropertyDrawer(typeof(Item), true)]
 public class ItemEditor : PropertyDrawer
 {

@@ -2,24 +2,27 @@
 using System;
 using System.Collections;
 
-public enum InteractEventState
+namespace RitualWarehouse
 {
-    BEGIN,
-    CONTINUE,
-    STOP
-}
-
-public class InteractArgs : EventArgs
-{
-    public readonly InteractEventState InteractionType;
-
-    public InteractArgs(InteractEventState desiredState)
+    public enum InteractEventState
     {
-        InteractionType = desiredState;
+        BEGIN,
+        CONTINUE,
+        STOP
     }
-}
 
-interface IInteractable
-{
-    void OnInteract(object sender, InteractArgs args);
+    public class InteractArgs : EventArgs
+    {
+        public readonly InteractEventState InteractionType;
+
+        public InteractArgs(InteractEventState desiredState)
+        {
+            InteractionType = desiredState;
+        }
+    }
+
+    interface IInteractable
+    {
+        void OnInteract(object sender, InteractArgs args);
+    }
 }
