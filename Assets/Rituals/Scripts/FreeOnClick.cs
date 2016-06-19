@@ -2,7 +2,6 @@
 using System.Collections;
 using System;
 
-[RequireComponent(typeof(Interactor))]
 public class FreeOnClick : MonoBehaviour, IInteractable
 {
     private SpringJoint2D spring;
@@ -10,14 +9,16 @@ public class FreeOnClick : MonoBehaviour, IInteractable
     void Start()
     {
         spring = GetComponent<SpringJoint2D>();
+        Debug.Assert(spring, "FreeOnClick needs a spring to destroy!");
 
-        if (null == spring)
-            Destroy(this);
-
-        GetComponent<Interactor>().Interaction += OnInteract;
+        var interactor = GetComponent<Interactor>();
+        if(interactor != null)
+        {
+            interactor.Interaction += OnInteract;
+        }
     }
 
-    void Release()
+    public void Release()
     {
         Destroy(spring);
         Destroy(this);

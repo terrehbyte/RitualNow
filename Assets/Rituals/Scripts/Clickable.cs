@@ -31,4 +31,9 @@ public class Clickable : MonoBehaviour, IInteractable
     {
         GetComponent<Interactor>().Interaction += OnInteract;
 	}
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, ClickRadius);
+    }
 }

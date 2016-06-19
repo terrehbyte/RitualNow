@@ -46,6 +46,7 @@ public class Elevator : MonoBehaviour
         AtStartPoint = !AtStartPoint;
     }
 
+    // TODO: Make this interruptable...
     IEnumerator StartTraveling(Vector3 goalPosition, float travelTime, bool shouldReturn = true)
     {
         

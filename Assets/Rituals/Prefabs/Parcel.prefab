@@ -11,11 +11,12 @@ GameObject:
   - 212: {fileID: 21292882}
   - 50: {fileID: 5056530}
   - 231: {fileID: 23127162}
-  - 114: {fileID: 11466622}
-  - 114: {fileID: 11480486}
   - 58: {fileID: 5808628}
+  - 114: {fileID: 11481500}
   - 114: {fileID: 11406116}
+  - 114: {fileID: 11480486}
   - 114: {fileID: 11435900}
+  - 114: {fileID: 11492302}
   m_Layer: 10
   m_Name: Parcel
   m_TagString: Untagged
@@ -97,17 +98,6 @@ MonoBehaviour:
   ActiveState:
     StateColor: {r: 1, g: 1, b: 1, a: 1}
     StateScale: {x: 1, y: 1, z: 1}
---- !u!114 &11466622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa41a96a6da405947a41e1125feaa54b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11480486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +109,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5391f77af8ab4e349baf927070a69e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11481500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa41a96a6da405947a41e1125feaa54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11492302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11480486}
+          m_MethodName: Release
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!212 &21292882
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -175,6 +206,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Delegates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -1550017359
@@ -274,6 +313,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ActiveState.StateColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11480486}
+    - target: {fileID: 0}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Release
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
