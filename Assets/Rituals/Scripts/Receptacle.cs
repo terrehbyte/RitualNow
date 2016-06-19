@@ -26,10 +26,13 @@ public class Receptacle : MonoBehaviour
     private int[] AcceptedItems;
     private Item CurrentAcceptedItem;
 
-    // help this naming is bonkers
+    // Total number of items recieved that were valid for this receptacle.
     private int NumberAccepted;
+
+    // Total number of items needed to fill the receptacle.
     public int NumberDesired = 2;
 
+    // Remaining number of items needed to fill the receptacle.
     public int NumberNeeded
     {
         get
@@ -42,13 +45,11 @@ public class Receptacle : MonoBehaviour
     // - arg0 :: Item needed
     // - arg1 :: Qty needed
     public ItemEvent OnReceptacleChange = new ItemEvent();
+
+    // Called when the receptacle's conditions have been fulfilled.
     public UnityEvent OnReceptacleFull = new UnityEvent();
 
-    public void Start()
-    {
-        Scramble();
-    }
-
+    // Changes the requirements for this receptacle and resets any running totals.
     public void Scramble()
     {
         NumberAccepted = 0;
@@ -56,18 +57,34 @@ public class Receptacle : MonoBehaviour
         OnReceptacleChange.Invoke(CurrentAcceptedItem, NumberNeeded);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    // Returns true if the evaluated item is accepted by this receptacle, otherwise returns false.
+    public bool ValidateItem(Item evaluatedItem)
     {
-        bool validDrop = false;
+        return CurrentAcceptedItem.tag == evaluatedItem.tag;
+    }
 
-        var itemID = other.GetComponent<ItemIdentifier>();
-
-        if (itemID == null)
+    private void OnItemAccepted(Item itemStillNeeded, int qtyStillNeeded)
+    {
+        if (NumberAccepted >= NumberDesired)
         {
-            return;
+            OnReceptacleFull.Invoke();
         }
+    }
 
-        if (itemID.item.tag == CurrentAcceptedItem.tag)
+    private void Awake()
+    {
+        OnReceptacleChange.AddListener(OnItemAccepted);
+    }
+    private void Start()
+    {
+        Scramble();
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var itemID = other.GetComponent<ItemIdentifier>();
+        if (itemID == null) { return; }
+
+        if (ValidateItem(itemID.item))
         {
             _stats.ParcelPlacementCount += 1;
 
@@ -76,24 +93,14 @@ public class Receptacle : MonoBehaviour
                 _player.TakeDamage(-1);
             }
 
-            validDrop = true;
-        }
-
-        if (!validDrop)
-        {
-            _player.TakeDamage(1);
-        }
-        else
-        {
             _stats.Score += 10; // TODO: different values for diff packs
             NumberAccepted += 1;
 
             OnReceptacleChange.Invoke(CurrentAcceptedItem, NumberNeeded);
-
-            if (NumberAccepted >= NumberDesired)
-            {
-                OnReceptacleFull.Invoke();
-            }
+        }
+        else
+        {
+            _player.TakeDamage(1);
         }
 
         Destroy(other.gameObject);

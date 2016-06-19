@@ -38,6 +38,9 @@ public class RitualInstaller : MonoInstaller
         Container.Bind<AssemblyLine>().ToSingle();
         Container.Bind<ITickable>().ToSingle<AssemblyLine>();
 
+        Container.Bind<BoxerLine>().ToSingle();
+        Container.Bind<ITickable>().ToSingle<BoxerLine>();
+
         Container.Bind<Sequencer>().ToSingle();
         Container.Bind<ITickable>().ToSingle<Sequencer>();
 

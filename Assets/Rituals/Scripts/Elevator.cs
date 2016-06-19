@@ -24,22 +24,29 @@ public class Elevator : MonoBehaviour
     //  - PlaybackMode (PingPong, Loop, etc.)
     //  - Different ways to set waypoints (Absolute Position, Relative Position, Transform)
     
+    public enum PlaybackMode
+    {
+        ONCE,
+        RETURN
+    }
+    public PlaybackMode playbackSetting;
+
     public void Start()
     {
         // Start at starting position
         transform.position = StartPoint.position;
     }
 
-    public void Toggle()
+    public void Toggle(bool returning = true)
     {
         if (Traveling)
             return;
 
-        StartCoroutine(StartTraveling(AtStartPoint ? EndPoint.position : StartPoint.position, TimeToTravel));
+        StartCoroutine(StartTraveling(AtStartPoint ? EndPoint.position : StartPoint.position, TimeToTravel, playbackSetting == PlaybackMode.RETURN && returning));
         AtStartPoint = !AtStartPoint;
     }
 
-    IEnumerator StartTraveling(Vector3 goalPosition, float travelTime)
+    IEnumerator StartTraveling(Vector3 goalPosition, float travelTime, bool shouldReturn = true)
     {
         
         //Debug.Assert(!Traveling, "Elevator started traveling while it was already traveling!");
@@ -87,12 +94,11 @@ public class Elevator : MonoBehaviour
 
         Traveling = false;
 
-        // return to start point if applicable
-        if (!AtStartPoint)
+        if (shouldReturn)
         {
             yield return new WaitForSeconds(WaitTime);
 
-            Toggle();
+            Toggle(false);
         }
 
 
