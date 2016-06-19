@@ -7,7 +7,6 @@ namespace RitualWarehouse
 {
     public class KillBox : MonoBehaviour
     {
-
         [Inject]
         Packer player;
 

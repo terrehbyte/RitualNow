@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 namespace RitualWarehouse
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class ParcelState : MonoBehaviour
     {
-        public enum ParcelStates
-        {
-            TRANSPORT,
-            ACTIVE
-        }
-
         [System.Serializable]
         public struct State
         {
@@ -46,11 +41,10 @@ namespace RitualWarehouse
         private void Start()
         {
             spriteRend = GetComponent<SpriteRenderer>();
-            GetComponent<Interactor>().Interaction += OnInteract;
             CurrentState = TransportState;
         }
 
-        private void OnInteract(object sender, InteractArgs args)
+        private void OnInteract(object sender)
         {
             CurrentState = ActiveState;
         }

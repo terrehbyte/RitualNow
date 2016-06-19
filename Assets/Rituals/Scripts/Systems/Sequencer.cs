@@ -16,31 +16,25 @@ namespace RitualWarehouse
         [Inject]
         AssemblyLine.Settings _assemSettings;
 
+        [Inject]
+        Settings _settings;
+
         private float Accumulator;
-        public float Step = 15.0f;
-
-        public int MaxRamps = 3;
-
-        public AssemblyLine assem;
-        public float RampUpSpawnRate = 0.1f;
-        public float RampUpParcelSpeed = 0.7f;
-
-        public float TimeBetweenRamp = 7.0f;
 
         public void Tick()
         {
             if (!_game.isGameActive)
                 return;
 
-            if (MaxRamps <= 0)
+            if (_settings.MaxRamps <= 0)
                 return;
 
             Accumulator += Time.deltaTime;
 
-            if (Accumulator > Step)
+            if (Accumulator > _settings.Step)
             {
                 // uncomment for hilarity
-                Accumulator -= Step;
+                Accumulator -= _settings.Step;
 
                 RampUpProduction();
             }
@@ -48,15 +42,26 @@ namespace RitualWarehouse
 
         public void RampUpProduction()
         {
-            Debug.Log("Work harder!");
+            _settings.MaxRamps -= 1;
 
-            MaxRamps -= 1;
+            Accumulator -= _settings.TimeBetweenRamp;
 
-            Accumulator -= TimeBetweenRamp;
+            _assem.addlDelay += _settings.TimeBetweenRamp;
+            _assemSettings.SpawnInterval -= _settings.RampUpSpawnRate;
+            _assemSettings.Speed += _settings.RampUpParcelSpeed;
+        }
 
-            _assem.addlDelay += TimeBetweenRamp;
-            _assemSettings.SpawnInterval -= RampUpSpawnRate;
-            _assemSettings.Speed += RampUpParcelSpeed;
+        [System.Serializable]
+        public class Settings
+        {
+            public float Step = 15.0f;
+
+            public int MaxRamps = 3;
+
+            public float RampUpSpawnRate = 0.1f;
+            public float RampUpParcelSpeed = 0.7f;
+
+            public float TimeBetweenRamp = 7.0f;
         }
     }
 }

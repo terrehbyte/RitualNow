@@ -54,6 +54,7 @@ namespace RitualWarehouse
         void InstallSettings()
         {
             Container.Bind<AssemblyLine.Settings>().ToSingleInstance(_settings.Assembler);
+            Container.Bind<Sequencer.Settings>().ToSingleInstance(_settings.Sequence);
         }
 
         [Serializable]
@@ -61,6 +62,7 @@ namespace RitualWarehouse
         {
             public Camera MainCamera;
             public AssemblyLine.Settings Assembler;
+            public Sequencer.Settings Sequence;
         }
     }
 
