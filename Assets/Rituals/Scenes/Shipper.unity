@@ -271,7 +271,7 @@ GameObject:
   - 114: {fileID: 87126689}
   - 50: {fileID: 87126693}
   - 231: {fileID: 87126692}
-  - 61: {fileID: 87126694}
+  - 233: {fileID: 87126696}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _livesCount: 3
+  ThrowForceScalar: 0.5
   PickerRadius: 2
 --- !u!212 &87126690
 SpriteRenderer:
@@ -340,7 +341,7 @@ SpringJoint2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 87126688}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
@@ -351,8 +352,8 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
-  m_DampingRatio: 1
-  m_Frequency: 1
+  m_DampingRatio: 0
+  m_Frequency: 0
 --- !u!50 &87126693
 Rigidbody2D:
   serializedVersion: 2
@@ -370,20 +371,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &87126694
-BoxCollider2D:
+--- !u!233 &87126696
+HingeJoint2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 87126688}
   m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.375, y: 0.875}
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_AngleLimits:
+    m_LowerAngle: 100
+    m_UpperAngle: 260
 --- !u!1 &116171959
 GameObject:
   m_ObjectHideFlags: 0

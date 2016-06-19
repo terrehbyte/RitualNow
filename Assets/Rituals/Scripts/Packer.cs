@@ -48,12 +48,26 @@ public class Packer : MonoBehaviour
             {
                 _picked.velocity = Vector2.zero;
                 pickedRBData = new RigidData(_picked);
-                _picked.gravityScale = 0f;
+                _picked.gravityScale = 1f;
+
+
             }
         }
     }
+    public float ThrowForceScalar = 0.5f;
+
     private Rigidbody2D _picked;
     private RigidData pickedRBData;
+
+    private Vector2 oldPosition;
+    private Vector2 newPosition;
+    private Vector2 velocity2D
+    {
+        get
+        {
+            return (newPosition - oldPosition) / Time.fixedDeltaTime;
+        }
+    }
 
     [SerializeField]
     [Tooltip("Maximum distance between click location and parcel. Measured in units.")]
@@ -99,6 +113,12 @@ public class Packer : MonoBehaviour
         return null;
     }
 
+    void FixedUpdate()
+    {
+        oldPosition = newPosition;
+        newPosition = transform.position;
+    }
+
     void Update()
     {
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
@@ -124,17 +144,16 @@ public class Packer : MonoBehaviour
                     interactor.DoInteraction();
                 }
             }
-
         }
         else if (Input.GetMouseButtonUp(0) && picked != null)   // let go
         {
             pickedRBData.Assign(picked);
+            picked.velocity = velocity2D * ThrowForceScalar;
             picked = null;
         }
         else if (Input.GetMouseButton(0) && picked != null) // move to new position
         {
-            picked.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
-            
+            //picked.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - Vector3.back);
         }
 
         
