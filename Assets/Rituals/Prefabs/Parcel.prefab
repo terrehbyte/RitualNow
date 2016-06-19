@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11480486}
   - 58: {fileID: 5808628}
   - 114: {fileID: 11406116}
+  - 114: {fileID: 11435900}
   m_Layer: 10
   m_Name: Parcel
   m_TagString: Untagged
@@ -79,6 +80,23 @@ MonoBehaviour:
   item:
     tag: 
     image: {fileID: 0}
+--- !u!114 &11435900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaf87c8522976c469bb985ca46615fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransportState:
+    StateColor: {r: 0.72794116, g: 0.72794116, b: 0.72794116, a: 1}
+    StateScale: {x: 0.75, y: 0.75, z: 0.75}
+  ActiveState:
+    StateColor: {r: 1, g: 1, b: 1, a: 1}
+    StateScale: {x: 1, y: 1, z: 1}
 --- !u!114 &11466622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,6 +217,62 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateColor.r
+      value: 0.72794116
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateColor.g
+      value: 0.72794116
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateColor.b
+      value: 0.72794116
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TransportState.StateColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ActiveState.StateColor.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
