@@ -9,4 +9,9 @@
 - [ ] Think about a way to get rid of completed boxes (and introduce new ones)?
 - [ ] Add multiple levels
 
+## Technical Debt
+- [ ] Add support for default variables for UnityEvent func calls
+- [ ] Add a proper Input Manager
+
 ## License
+
