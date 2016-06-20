@@ -29,6 +29,9 @@ namespace RitualWarehouse
             if (_settings.MaxRamps <= 0)
                 return;
 
+            if (_assem.addlDelay > 0f)
+                return;
+
             Accumulator += Time.deltaTime;
 
             if (Accumulator > _settings.Step)

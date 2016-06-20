@@ -69,7 +69,7 @@ namespace RitualWarehouse
             }
         }
 
-        public LayerMask PackerMask = LayerMask.NameToLayer("Selectable");
+        public LayerMask PackerMask;
 
         [SerializeField]
         [Tooltip("Maximum distance between click location and parcel. Measured in units.")]
@@ -90,8 +90,19 @@ namespace RitualWarehouse
             LivesCount -= damage;
         }
 
-        // Returns the nearest available parcel GameObject for a given screenspace position. If none, returns null.
         GameObject TryPickParcel(Vector2 mousePosition)
+        {
+            Collider2D hitCollider2D = Physics2D.OverlapPoint(transform.position, PackerMask);
+            if (hitCollider2D != null && hitCollider2D.GetComponent<ItemIdentifier>())
+            {
+                return hitCollider2D.gameObject;
+            }
+
+            return null;
+        }
+
+        // Returns the nearest available parcel GameObject for a given screenspace position within a given radius in worldspace. If none, returns null.
+        GameObject TryPickParcelCircle(Vector2 mousePosition, float radius)
         {
             Vector2 mousePositionInWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -103,7 +114,31 @@ namespace RitualWarehouse
             var closestParcel = validParcelList.OrderBy(x => Vector2.Distance(x.transform.position, mousePositionInWorldSpace)).First();
             float distance = Vector2.Distance(mousePositionInWorldSpace, closestParcel.transform.position);
 
-            return distance < PickerRadius ? closestParcel : null;
+            return distance < radius ? closestParcel : null;
+        }
+
+        // Returns whatever GameObject is directly underneath the given screenspace position. If none, returns null.
+        GameObject TryPick(Vector2 mousePosition)
+        {
+            Collider2D hitCollider2D = Physics2D.OverlapPoint(transform.position, PackerMask);
+            if (hitCollider2D != null)
+            {
+                return hitCollider2D.gameObject;
+            }
+
+            return null;
+        }
+
+        // Returns whatever GameObject is underneath the given screenspace position within a given radius in worldspace. If none, returns null.
+        GameObject TryPickCircle(Vector2 mousePosition, float radius)
+        {
+            Collider2D hitCollider2D = Physics2D.OverlapCircle(transform.position, radius, PackerMask);
+            if (hitCollider2D != null)
+            {
+                return hitCollider2D.gameObject;
+            }
+
+            return null;
         }
 
         void Start()
@@ -126,32 +161,40 @@ namespace RitualWarehouse
             if (Input.GetMouseButtonDown(0))
             {
                 // Click Priority
+                // 0. Whatever you literally clicked on?
                 // 1. Parcels
                 // 2. Everything Else 
+                GameObject pickedObject = null;
+                bool isParcel = false;
 
-                // Try parcel...
-                GameObject pickedObject = TryPickParcel(Input.mousePosition);
-
-                // Did we get a parcel?
-                if (pickedObject != null)
+                // Try parcel (exact)
+                if (pickedObject = TryPickParcel(transform.position))
                 {
-                    // try holding
-                    var targetRbody = pickedObject.GetComponent<Rigidbody2D>();
-                    if (null != targetRbody)
-                    {
-                        picked = targetRbody;
-                    }
+                    isParcel = true;
                 }
-                else
+                // Try anything (exact)
+                else if(pickedObject = TryPick(transform.position))
                 {
-                    // Did we get anything else?
-                    //Collider2D hitCollider2D = Physics2D.OverlapPoint(transform.position, PackerMask);
-                    // TODO: does this always return the closest collider?
-                    Collider2D hitCollider2D = Physics2D.OverlapCircle(transform.position, EverythingElseRadius, PackerMask);
-                    if (hitCollider2D != null)
-                    {
-                        pickedObject = hitCollider2D.gameObject;
-                    }
+
+                }
+                // Try parcel (lenient)
+                else if(pickedObject = TryPickParcelCircle(transform.position, PickerRadius))
+                {
+                    isParcel = true;
+
+                }
+                // Try anything (lenient)
+                else if(pickedObject = TryPickCircle(transform.position, EverythingElseRadius))
+                {
+
+                }
+
+                if (isParcel)
+                {
+                    Rigidbody2D pickedRB = pickedObject.GetComponent<Rigidbody2D>();
+
+                    if (pickedRB)
+                        picked = pickedRB;
                 }
 
                 // Try interacting with whatever we managed to get.
@@ -171,6 +214,12 @@ namespace RitualWarehouse
                 picked.velocity = velocity2D * ThrowForceScalar;
                 picked = null;
             }
+        }
+
+        // Only for editor use.
+        void Reset()
+        {
+            PackerMask = LayerMask.NameToLayer("Selectable");
         }
     }
 }
